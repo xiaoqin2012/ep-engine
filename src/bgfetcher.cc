@@ -2,7 +2,7 @@
 #include "config.h"
 #include "ep.hh"
 
-const double BgFetcher::sleepInterval = 60.0;
+const double BgFetcher::sleepInterval = 1.0;
 
 bool BgFetcherCallback::callback(Dispatcher &, TaskId &t) {
     return bgfetcher->run(t);
@@ -121,13 +121,13 @@ bool BgFetcher::run(TaskId &tid) {
 
         stats.numRemainingBgJobs.decr(total_num_fetched_items);
 
-        getLogger()->log(EXTENSION_LOG_DEBUG, NULL,
+        /*getLogger()->log(EXTENSION_LOG_DEBUG, NULL,
                          "BgFetcher: total_num_items2fetch = %d "
                          "total_num_fetched_items = %d "
                          "totaL_num_requeued_items = %d\n",
                          total_num_items2fetch,
                          total_num_fetched_items,
-                         total_num_requeued_items);
+                         total_num_requeued_items);*/
     }
 
     if(!stats.numRemainingBgJobs.get()) {

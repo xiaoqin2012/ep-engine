@@ -84,8 +84,8 @@ public:
     bool pendingJob(void);
 
     void notifyBGEvent(void) {
+        LockHolder lh(taskMutex);
         if (++stats.numRemainingBgJobs == 1) {
-            LockHolder lh(taskMutex);
             assert(task.get());
             dispatcher->wake(task);
         }
